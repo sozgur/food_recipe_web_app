@@ -8,13 +8,15 @@ This web application provide many recipes access to other users for help to cook
 
 -   User can share own recipe on web app only with login on page
 -   Users can read recipes without login.
--   User can make like the recipe or rate
+-   User can rate the recipies
 -   User can make comment under the recipe
--   User can make “I did” button that calculate how many people did before this recipe
 -   User can follow the other users
+-   User create own cook recipe book and add the other recipies
 
 ### External APIs
 
 Calorie will be calculated using **[external API](https://api-ninjas.com/api/nutrition)**.
 
-##### TODO: Add database schema
+### Database Schema
+
+![Database Diagram](static/images/diagram.png)
