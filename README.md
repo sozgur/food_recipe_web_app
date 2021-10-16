@@ -19,4 +19,4 @@ Calorie will be calculated using **[external API](https://api-ninjas.com/api/nut
 
 ### Database Schema
 
-![Database Diagram](app/static/images/diagram.png)
+![Database Diagram](app/static/images/diagram1.png)
