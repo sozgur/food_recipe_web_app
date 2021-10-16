@@ -1,6 +1,18 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager, UserMixin
 
+from datetime import datetime
+
+bcrypt = Bcrypt()
 db = SQLAlchemy()
+login_manager = LoginManager()
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
 
 class Follows(db.Model):
     """Connection of a follower <-> followed_user."""
@@ -19,7 +31,7 @@ class Follows(db.Model):
         primary_key=True,
     )
 
-class User(db.Model):
+class User(UserMixin, db.Model):
 
     __tablename__ = "users"
 
@@ -29,12 +41,59 @@ class User(db.Model):
     email = db.Column(db.String(50), nullable=False, unique=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
-    auth_reset_password = db.Column(db.Text, nullable=True)
-    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     @property
     def fullname(self):
         return f"{self.first_name} {self.last_name}" 
+
+
+    @classmethod
+    def register(cls, username, email, first_name, last_name, password):
+        """Register user.
+
+        Hashes password and adds user to system.
+        """
+
+        hashed_pwd = bcrypt.generate_password_hash(password).decode('UTF-8')
+
+        user = User(
+            username=username,
+            email=email,
+            first_name=first_name,
+            last_name=last_name,
+            password=hashed_pwd,
+        )
+
+        db.session.add(user)
+        return user
+
+
+    @classmethod
+    def authenticate(cls, username, password):
+        """Validate that user exists & password is correct
+           Return user if valid; else return False
+        """
+
+        user = User.query.filter_by(username=username).first()
+        if user and bcrypt.check_password_hash(user.password, password):
+            return user
+
+        # if there is no valid user return False
+        return False
+
+
+    def reset_password(self, password):
+
+        hashed = bcrypt.generate_password_hash(password)
+        # turn bytestring into normal (unicode utf8) string
+        hashed_utf8 = hashed.decode("utf8")
+
+        self.password = hashed_utf8
+        self.auth_reset_password = None
+
+        db.session.commit()
+        return self
 
 
     followers = db.relationship(

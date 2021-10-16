@@ -1,0 +1,7 @@
+Dear {{ user.username  }}
+
+Welcome to Delicious Food Recipies!
+
+To reset your password please click on the following link:
+
+{{ url_for('auth.reset_password', reset_key=reset_key, _external=True) }}
