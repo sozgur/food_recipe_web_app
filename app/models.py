@@ -19,7 +19,7 @@ class Follows(db.Model):
 
     __tablename__ = 'follows'
 
-    user_follower_id = db.Column(
+    user_being_followed_id = db.Column(
         db.Integer,
         db.ForeignKey('users.id', ondelete="cascade"),
         primary_key=True,
@@ -41,6 +41,10 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(50), nullable=False, unique=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
+    image_url = db.Column(
+        db.Text,
+        default="/static/images/default-pic.png"
+    )
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     @property
@@ -99,7 +103,7 @@ class User(UserMixin, db.Model):
     followers = db.relationship(
         "User",
         secondary="follows",
-        primaryjoin=(Follows.user_follower_id == id),
+        primaryjoin=(Follows.user_being_followed_id == id),
         secondaryjoin=(Follows.user_following_id == id)
     )
 
@@ -107,90 +111,102 @@ class User(UserMixin, db.Model):
         "User",
         secondary="follows",
         primaryjoin=(Follows.user_following_id == id),
-        secondaryjoin=(Follows.user_follower_id == id)
+        secondaryjoin=(Follows.user_being_followed_id == id)
     )
 
-    class Category(db.Model):
-        """Categorty table for each recipe category"""
+class Category(db.Model):
+    """Categorty table for each recipe category"""
 
-        __tablename__ = "categories"
+    __tablename__ = "categories"
 
-        id = db.Column(db.Integer, primary_key=True, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
 
-        name = db.Column(db.String(50), nullable=False)
-
-
-    class RecipeBook(db.Model):
-        """Recipe books for user can create recipe list """
-
-        __tablename__ = "recipebooks"
-
-        id = db.Column(db.Integer, primary_key=True, nullable=False)
-
-        name = db.Column(db.String(50), nullable=False)
-
-        user_id = db.Column(
-            db.Integer, 
-            db.ForeignKey('users.id', ondelete="cascade"), 
-            nullable=False
-        )
-
-        created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
-        updated_at = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
+    name = db.Column(db.String(50), nullable=False)
 
 
-    class Recipe(db.Model):
+class RecipeBook(db.Model):
+    """Recipe books for user can create recipe list """
 
-        __tablename__ = "recipes"
+    __tablename__ = "recipebooks"
 
-        id = db.Column(db.Integer, primary_key=True, nullable=False)
-        title = db.Column(db.String(150), nullable=False)
-        ingredient = db.Column(db.Text, nullable=False)
-        description = db.Column(db.Text, nullable=False)
-        category_id = db.Column(
-            db.Integer, 
-            db.ForeignKey('categories.id', ondelete='SET NULL'))
-        total_rate = db.Column(db.Integer, nullable=True)
-        average_rate = db.Column(db.Float, nullable=True)
-        created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
-        updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
 
+    name = db.Column(db.String(50), nullable=False)
 
-    class RecipeBookEntity(db.Model):
+    user_id = db.Column(
+        db.Integer, 
+        db.ForeignKey('users.id', ondelete="cascade"), 
+        nullable=False
+    )
 
-        __tablename__ = "recipebookentities"
-
-        book_id = db.Column(
-            db.Integer, 
-            db.ForeignKey('recipebooks.id', ondelete="cascade"), 
-            primary_key=True
-        )
-
-        recipe_id = db.Column(
-            db.Integer, 
-            db.ForeignKey('recipes.id', ondelete="cascade"), 
-            primary_key=True
-        )
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    updated_at = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
 
 
+class Recipe(db.Model):
 
-    class Rate(db.Model):
+    __tablename__ = "recipes"
 
-        __tablename__ = "rates"
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    title = db.Column(db.String(150), nullable=False)
+    ingredients = db.Column(db.Text, nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    category_id = db.Column(
+        db.Integer, 
+        db.ForeignKey('categories.id', ondelete='SET NULL'))
+    image_url = db.Column(db.Text, nullable=True)
+    total_rate = db.Column(db.Integer, nullable=True)
+    average_rate = db.Column(db.Float, nullable=True)
+    approx_calories = db.Column(db.Float, nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
-        id = db.Column(db.Integer, primary_key=True, nullable=False)
-        rate = db.Column(db.Integer, nullable=False)
 
-        user_id = db.Column(
-            db.Integer, 
-            db.ForeignKey('users.id', ondelete="SET NULL")
-        )
+    # def update_calories(self, total_calories):
+        
+    #     self.average_rate
 
-        recipe_id = db.Column(
-            db.Integer, 
-            db.ForeignKey('recipes.id', ondelete="cascade"), 
-            nullable=False
-        )
+    #     db.session.commit(recipe)
+    #     return user
+
+    # Recipe.update_calories(total_calories)
+
+
+class RecipeBookEntity(db.Model):
+
+    __tablename__ = "recipebookentities"
+
+    book_id = db.Column(
+        db.Integer, 
+        db.ForeignKey('recipebooks.id', ondelete="cascade"), 
+        primary_key=True
+    )
+
+    recipe_id = db.Column(
+        db.Integer, 
+        db.ForeignKey('recipes.id', ondelete="cascade"), 
+        primary_key=True
+    )
+
+
+
+class Rate(db.Model):
+
+    __tablename__ = "rates"
+
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    rate = db.Column(db.Integer, nullable=False)
+
+    user_id = db.Column(
+        db.Integer, 
+        db.ForeignKey('users.id', ondelete="SET NULL")
+    )
+
+    recipe_id = db.Column(
+        db.Integer, 
+        db.ForeignKey('recipes.id', ondelete="cascade"), 
+        nullable=False
+    )
 
 
 

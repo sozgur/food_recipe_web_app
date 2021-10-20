@@ -7,12 +7,6 @@ from flask_login import login_user, current_user, logout_user, login_required
 from .auth_forms import RegisterForm, LoginForm, ForgotPasswordForm, CreateNewPasswordForm
 from .auth_utils import token_generator, token_get_user_id
 
-#TODO:Remove it
-@auth.route("/")
-def home_page():
-    """Home page for test"""
-    return render_template("index.html")
-
 
 @auth.route('/register', methods=["GET", "POST"])
 def register():
@@ -50,7 +44,7 @@ def login():
     form = LoginForm()
 
     if current_user.is_authenticated:
-        flash("Aldready login")
+        flash("Aldready login", 'info')
         return redirect("/")
 
     if form.validate_on_submit():

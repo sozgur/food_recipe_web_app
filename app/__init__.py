@@ -34,4 +34,10 @@ def create_app(config=DevelopmentConfig):
     from app.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
+    from app.user import user as user_blueprint
+    app.register_blueprint(user_blueprint)
+
+    from app.recipe import recipe as recipe_blueprint
+    app.register_blueprint(recipe_blueprint)
+
     return app
