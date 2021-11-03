@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="row justify-content-md-center">
+    <div class="col-md-7 col-lg-5">
+    <h1> Add Recipe </h1>
+      
+      <form method="POST" id="recipe_form">
+        {{ form.hidden_tag() }}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            {% if field.id == 'ingredients' %}
+                {{ field.label }}
+                {{ field(class_="form-control") }}
+                <div class="total-calorie">
+                 <h6>Add Approx. Total Calories</h6>
+                 <p id="calories-info"></p>
+                 <button class="btn btn-primary btn-xs calculateCalories">Calculate</button>
+                </div>
+                
+            {% else %}
+            {{ field.label }}
+            {{ field(class_="form-control") }}
+            {% endif %}
+            
+
+            {% for error in field.errors %}
+                <span class="form-text text-danger">{{ error }}</span>
+            {% endfor %}
+        {% endfor %}
+
+        <button class="btn btn-success btn-block btn-lg">Submit</button>
+      </form>
+    </div>
+  </div> 
+
+{% endblock %}

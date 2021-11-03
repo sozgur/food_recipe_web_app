@@ -25,10 +25,13 @@ def add_recipe():
     form.category.choices=categories
 
     if form.validate_on_submit():
+
         image_url = form.image_url.data if form.image_url.data else None
+        calories = form.calories.data if form.calories.data else None
+
         recipe = Recipe(title=form.title.data, ingredients=form.ingredients.data, 
             description = form.description.data, category_id = form.category.data,
-            image_url=image_url, approx_calories=form.calories.data)
+            image_url=image_url, approx_calories=calories)
 
         db.session.add(recipe)
         db.session.commit()

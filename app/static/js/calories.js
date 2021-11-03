@@ -1,4 +1,4 @@
-$calculateCaloriesButton = $(".calculateCalories");
+$calculateCaloriesButton = $("#calculateCalories");
 
 async function calculateCalories(ingredients) {
     const res = await axios({

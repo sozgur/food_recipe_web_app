@@ -3,33 +3,44 @@
 {% block content %}
 
   <div class="row justify-content-md-center">
-    <div class="col-md-7 col-lg-5">
+    <div class="col-md-7">
     <h1> Add Recipe </h1>
       
-      <form method="POST" id="recipe_form">
+        <!-- multistep form -->
+      <form method="POST" class="msform" id="recipe_form" action="/add-recipe">
         {{ form.hidden_tag() }}
-        {% for field in form if field.widget.input_type != 'hidden' %}
-            {% if field.id == 'ingredients' %}
-                {{ field.label }}
-                {{ field(class_="form-control") }}
-                <div class="total-calorie">
-                 <h6>Add Approx. Total Calories</h6>
-                 <p id="calories-info"></p>
-                 <button class="btn btn-primary btn-xs calculateCalories">Calculate</button>
-                </div>
-                
-            {% else %}
-            {{ field.label }}
-            {{ field(class_="form-control") }}
-            {% endif %}
-            
+        <!-- fieldsets -->
+        <fieldset>
+          <h2 class="fs-title">Recipe Informations</h2> 
+          {{ form.title.label(class_="form-label") }}
+          {{ form.title(class_="form-control") }}
+          <div id="title-error" class="invalid-feedback recipe-error"></div>
+              
+          {{ form.ingredients.label(class_="form-label") }}
+          {{ form.ingredients(class_="form-control") }}
+          <div id="ingredients-error" class="invalid-feedback recipe-error"></div>
 
-            {% for error in field.errors %}
-                <span class="form-text text-danger">{{ error }}</span>
-            {% endfor %}
-        {% endfor %}
+          {{ form.description.label(class_="form-label") }}
+          {{ form.description(class_="form-control") }}
+          <div id="description-error" class="invalid-feedback recipe-error"></div>
 
-        <button class="btn btn-success btn-block btn-lg">Submit</button>
+          <input type="button" id="calculateCalories" name="next" class="next action-button" value="Next" />
+
+        </fieldset>
+        <fieldset>
+          <h2 class="fs-title">Recipe Image and Category</h2>
+          {{ form.category.label(class_="form-label") }}
+          {{ form.category(class_="form-control") }}
+
+          {{ form.image_url.label(class_="form-label") }}
+          {{ form.image_url(class_="form-control") }}
+
+          <input type="button" name="previous" class="previous action-button" value="Previous" />
+          <button class="submit action-button">Submit</button>
+
+        </fieldset>
+
+         
       </form>
     </div>
   </div> 
