@@ -31,6 +31,9 @@ def create_app(config=DevelopmentConfig):
     mail.init_app(app)
     mail.app = app
 
+    from app.category import category as category_blueprint
+    app.register_blueprint(category_blueprint)
+
     from app.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
@@ -39,5 +42,6 @@ def create_app(config=DevelopmentConfig):
 
     from app.recipe import recipe as recipe_blueprint
     app.register_blueprint(recipe_blueprint)
+
 
     return app
