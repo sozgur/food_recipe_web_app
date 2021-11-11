@@ -1,2 +1,2 @@
-from app.models import User, Category, Follows, db
+from app.models import User, Category, Follows, Recipe, db
 from run import app

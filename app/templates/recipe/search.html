@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if recipes|length == 0 %}
+    <h3>Sorry, no recipe found</h3>
+  {% else %}
+    <h3>Search Result</h3>
+    <div class="recipe-list">  
+        {% for recipe in recipes %}
+            <div class="recipe">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="card" style="width: 20rem;">
+                    <a href="{{url_for('recipe.detail', recipe_id=recipe.id)}}">
+                        <img class="card-img-top" src="{{recipe.img_url}}" alt="Card image cap">
+                    </a>
+                      <div class="card-body">
+                        <a class="card-title" href="{{url_for('recipe.detail', recipe_id=recipe.id)}}">{{recipe.title}}</a>
+                        <span class="recipe-elements">Servings {{recipe.serving}}, Prep {{recipe.prep}}, Cook {{recipe.cook}} </span>
+                      </div>
+                      <hr>
+                      <div class="recipe-info">
+                        <a class='recipe-owner' href="{{url_for('user.user_recipes', user_id=recipe.user.id)}}" title="{{recipe.user.fullname}}">
+                            <img src="{{recipe.user.image_url}}">
+                            {{recipe.user.fullname}}
+                        </a>
+                        <div class="recipe-count">
+                          <img height="25" width="25" src="/static/images/open-book.png">
+                          <span class="count">{{recipe.user.recipes|length}}</span> 
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+  
+  {% endif %}
+
+{% endblock %}

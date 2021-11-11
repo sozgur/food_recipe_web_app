@@ -138,6 +138,37 @@ def calculate_calories():
         return jsonify({'error': "Can't calculate calories"}), 204
 
 
+@recipe.route("/recipe/search")
+def list_recipes():
+
+    search = request.args.get('q')
+
+    if not search:
+        recipes = Recipe.query.order_by(Recipe.created_at.desc()).all()
+    else:
+
+        queries = search.split()
+        l = len(queries)
+        if l >= 3:
+            q1 = queries[0]
+            q2 = queries[1]
+            q3 = queries[2]
+        elif l == 2:
+            q1 = queries[0]
+            q2 = queries[1]
+            q3 = ''
+        elif l == 1:
+            q1 = queries[0]
+            q2 = ''
+            q3 = ''
+
+        recipes = Recipe.query.filter(Recipe.title.ilike(f"%{q1}%")).filter(Recipe.title.ilike(f"%{q2}%")).filter(Recipe.title.ilike(f"%{q3}%")).order_by(Recipe.created_at.desc()).all() 
+
+
+    return render_template('recipe/search.html', recipes = recipes)
+
+
+
 @recipe.context_processor
 def inject_categories():
     categories = Category.query.order_by('name').all()
