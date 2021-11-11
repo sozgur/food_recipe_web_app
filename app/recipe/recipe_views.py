@@ -197,3 +197,7 @@ def inject_categories():
     return dict(categories=categories)
 
 
+@recipe.errorhandler(404)
+def page_not_found(e):
+    """404 NOT FOUND page."""
+    return render_template('404.html'), 404

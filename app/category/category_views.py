@@ -21,3 +21,9 @@ def recipe_list(category_id):
     category = Category.query.get_or_404(category_id)
     recipes = category.recipes
     return render_template("category/recipe_list.html", category=category, recipes = recipes)
+
+
+@category.errorhandler(404)
+def page_not_found(e):
+    """404 NOT FOUND page."""
+    return render_template('404.html'), 404

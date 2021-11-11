@@ -143,6 +143,10 @@ def reset_password(reset_key):
             return render_template("auth/reset_password.html", form=form)
 
 
+@auth.errorhandler(404)
+def page_not_found(e):
+    """404 NOT FOUND page."""
+    return render_template('404.html'), 404
 
 
 
