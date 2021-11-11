@@ -4,7 +4,7 @@ from app import create_app
 from config import DevelopmentConfig, ProductionConfig, TestingConfig
 
 
-app = create_app()
+app = create_app(ProductionConfig)
 
 if __name__ == '__main__':
     app.run()
