@@ -67,7 +67,6 @@ class User(UserMixin, db.Model):
     def fullname(self):
         return f"{self.first_name} {self.last_name}" 
 
-
     @classmethod
     def register(cls, username, email, first_name, last_name, password):
         """Register user.
@@ -153,6 +152,16 @@ class Category(db.Model):
     banner_img_url = db.Column(db.Text, nullable=True)
 
     recipes = db.relationship('Recipe', backref='category', cascade="all, delete-orphan")
+
+
+    @property
+    def img_url(self):
+
+        if self.banner_img_url: 
+            return f"{self.banner_img_url}"
+
+        return "/static/images/banner.jpeg"
+
 
 
 # class RecipeBook(db.Model):
