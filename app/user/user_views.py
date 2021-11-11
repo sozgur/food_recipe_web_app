@@ -8,6 +8,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 @user.route("/users/<int:user_id>/recipes")
 def user_recipes(user_id):
+    """Show list of recipes of this user"""
     user = User.query.get_or_404(user_id)
     recipes = Recipe.query.filter_by(user_id=user.id).order_by(Recipe.created_at.desc()).all()
     return render_template("user/profile.html", recipes=recipes, user=user)
@@ -53,10 +54,8 @@ def toggle_follow(user_id):
 
 @user.context_processor
 def inject_categories():
+    """
+    Get categories for using navbar
+    """
     categories = Category.query.order_by('name').all()
     return dict(categories=categories)
-
-# @user.context_processor
-# def inject_user():
-#     user = Category.query.order_by('name').all()
-#     return dict(categories=categories)

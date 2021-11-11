@@ -10,6 +10,9 @@ from .recipe_forms import AddRecipeForm, EditRecipeForm
 
 @recipe.route("/")
 def home_page():
+    """
+    List all recipes order created at
+    """
     recipes = Recipe.query.order_by(Recipe.created_at.desc()).all()
     return render_template("index.html", recipes=recipes)
 
@@ -17,11 +20,16 @@ def home_page():
 
 @recipe.route("/add-recipe", methods=["GET", "POST"])
 def add_recipe():
+    """
+    Create a new recipe on db
+    """
+
     if not current_user.is_authenticated:
         return redirect(url_for('auth.login'))
 
     form = AddRecipeForm()
 
+    #get category name and id as tuble
     categories = [(c.id, c.name) for c in Category.query.order_by('name')]
     form.category.choices=categories
 
@@ -55,6 +63,7 @@ def edit_recipe(recipe_id):
     categories = [(c.id, c.name) for c in Category.query.order_by('name')]
     form.category.choices=categories
 
+    #TODO: Delete these after find soltuion for category and serving 
     # form.category.default = recipe.category_id
     # form.servings.default = recipe.serving 
     # form.title.default = recipe.title 
@@ -93,6 +102,9 @@ def edit_recipe(recipe_id):
 @recipe.route("/recipe/<int:recipe_id>/delete", methods=["POST"])
 @login_required
 def delete_recipe(recipe_id):
+    """
+    Delete recipe form db
+    """
 
     recipe = Recipe.query.get_or_404(recipe_id)
 
@@ -106,12 +118,15 @@ def delete_recipe(recipe_id):
 
 @recipe.route("/detail/<int:recipe_id>", methods=["GET"])
 def detail(recipe_id):
-
+    """
+    Show a specific recipe and calculate approx calorie for per server
+    """
     recipe = Recipe.query.get_or_404(recipe_id)
 
     if recipe.approx_calories:
         per_serving = recipe.approx_calories // recipe.serving 
     else:
+        # if approx_calories come 0 or empty from Api
         per_serving = "Can't calculated"
 
     return render_template("recipe/detail.html", recipe = recipe, per_serving = per_serving )
@@ -120,7 +135,10 @@ def detail(recipe_id):
 
 @recipe.route("/calculate-calories/json", methods=["POST"])
 def calculate_calories():
-
+    """
+    Calculate approx calories using API 
+    Take all ingrredients and send API and return result as Json
+    """
     ingredients = request.json["ingredients"]
    
     api_url = 'https://api.api-ninjas.com/v1/nutrition?query={}'.format(ingredients)
@@ -140,13 +158,15 @@ def calculate_calories():
 
 @recipe.route("/recipe/search")
 def list_recipes():
-
+    """
+    Search recipes using query and return found recipes
+    """
     search = request.args.get('q')
 
     if not search:
         recipes = Recipe.query.order_by(Recipe.created_at.desc()).all()
     else:
-
+        # search with first 3 query 
         queries = search.split()
         l = len(queries)
         if l >= 3:
@@ -168,8 +188,12 @@ def list_recipes():
     return render_template('recipe/search.html', recipes = recipes)
 
 
-
 @recipe.context_processor
 def inject_categories():
+    """
+    Get categories for using navbar
+    """
     categories = Category.query.order_by('name').all()
     return dict(categories=categories)
+
+

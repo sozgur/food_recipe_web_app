@@ -9,6 +9,9 @@ from .auth_utils import token_generator, token_get_user_id
 
 @auth.context_processor
 def inject_categories():
+    """
+    Get categories for using navbar
+    """
     categories = Category.query.order_by('name').all()
     return dict(categories=categories)
 
