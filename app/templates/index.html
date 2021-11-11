@@ -1,8 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  
 
-<h1>Hello Main Page</h1>
+ <div class="title">
+     <h2>Trend Delicious Recipes</h2>
+ </div> 
+
+<div class="recipe-list">  
+    {% for recipe in recipes %}
+        <div class="recipe">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="card" style="width: 20rem;">
+                <a href="{{url_for('recipe.detail', recipe_id=recipe.id)}}">
+                    <img class="card-img-top" src="{{recipe.img_url}}" alt="Card image cap">
+                </a>
+                  <div class="card-body">
+                    <a class="card-title" href="{{url_for('recipe.detail', recipe_id=recipe.id)}}">{{recipe.title}}</a>
+                    <span class="recipe-elements">Servings {{recipe.serving}}, Prep {{recipe.prep}}, Cook {{recipe.cook}} </span>
+                  </div>
+                  <hr>
+                  <div class="recipe-info">
+                    <a class='recipe-owner' href="{{url_for('user.user_recipes', user_id=recipe.user.id)}}" title="{{recipe.user.fullname}}">
+                        <img src="{{recipe.user.image_url}}">
+                        {{recipe.user.fullname}}
+                    </a>
+                    <div class="recipe-count">
+                      <img height="25" width="25" src="/static/images/open-book.png">
+                      <span class="count">{{recipe.user.recipes|length}}</span> 
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

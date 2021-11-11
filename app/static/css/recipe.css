@@ -4,15 +4,17 @@
   margin: 50px auto;
   text-align: center;
   position: relative;
+  margin-right: 20px;
 }
 .msform fieldset {
   background: white;
   border: 0 none;
   border-radius: 3px;
-  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.1);
   padding: 20px 30px;
   box-sizing: border-box;
   width: 80%;
+  margin-left: -8%;
 
   /*stacking fieldsets above each other*/
   position: relative;
@@ -52,13 +54,15 @@
 }
 /*headings*/
 .fs-title {
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: bold;
   text-transform: uppercase;
   color: #2c3e50;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }
 .fs-subtitle {
   font-weight: normal;
+  font-weight: bold;
   font-size: 13px;
   color: #666;
   margin-bottom: 20px;
@@ -71,4 +75,95 @@
   line-height: 15px;
   margin: 0 0 15px;
   text-align: left;
+}
+
+.recipe-elements {
+  font-size: 12px;
+  display: block;
+  color: #7a7a7a;
+  margin-top: 8px;
+}
+
+.recipe-info {
+  font-size: 13px;
+  padding-top: 3px;
+  padding-left: 15px;
+  padding-right: 3px;
+  padding-bottom: 15px;
+}
+
+.recipe-list {
+  display: grid;
+  line-height: normal;
+  grid-row-gap: 25px;
+  grid-template-columns: 33% 33% 33%;
+}
+
+.card-img-top img {
+  width: 100%;
+  height: 280px;
+}
+
+.recipe-owner img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.recipe-entry-info img {
+  width: 600px;
+  height: 400px;
+}
+
+.recipe-slider {
+  float: left;
+  margin-top: 1rem;
+}
+
+.recipe-social img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.recipe-social {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.recipe-social .owner-name {
+  display: block;
+  padding: 5px;
+}
+
+.recipe-time-info {
+  margin-top: 2rem;
+  margin-left: 15px;
+}
+
+.recipe-meta-item {
+  width: 100%;
+  padding-bottom: 16px;
+}
+
+.recipe-meta-item-header {
+  font-weight: bold;
+  font-size: 15px;
+  color: black;
+  float: left;
+  margin-right: 7px;
+}
+
+.recipe-meta-item-body {
+  font-size: 14px;
+  color: black;
+}
+
+.recipe-article {
+  white-space: pre-line;
+}
+
+.recipe-social .follow-button {
+  width: 90%;
+  margin-top: 6 px;
 }

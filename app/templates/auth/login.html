@@ -4,7 +4,7 @@
 
   <div class="row justify-content-md-center">
     <div class="col-md-7 col-lg-5">
-
+      <h1 class="mt-5">Login</h1>
       <form method="POST" id="user_form">
         {{ form.hidden_tag() }}
 
@@ -12,12 +12,21 @@
           {% for error in field.errors %}
             <span class="text-danger">{{ error }}</span>
           {% endfor %}
-          {{ field(placeholder=field.label.text, class="form-control") }}
+          <div class="form-group row mt-4">
+            <div class="col-sm-10">
+              {{ field(placeholder=field.label.text, class="form-control") }}
+            </div>
+          </div>
         {% endfor %}
 
-        <button class="btn btn-primary btn-block btn-lg">Log in</button>
-        <a href="/forgot-password">Forgot Password?</a>
+        <div class="mt-3">
+          <button class="btn btn-primary btn-block btn-lg">Log in</button>
+          <a href="/forgot-password">Forgot Password?</a>
+        </div>
+
       </form>
+      <br>
+       <div class="row"> <small class="font-weight-bold">Don't have an account? <a class="text-danger" href="/register">Register</a></small> </div>
     </div>
   </div>
 

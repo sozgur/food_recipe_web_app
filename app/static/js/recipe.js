@@ -8,28 +8,53 @@ function validate() {
   let notvalid = false;
   $(".recipe-error").html("");
 
-  if ($("#title").val().length < 5 || $("#title").val().length > 100) {
-    notvalid = true;
-    $("#title-error").html("Title must be between 5 and 100 characters long!");
+  if ($(".step1").css("display") != "none") {
+    if ($("#title").val().length < 5 || $("#title").val().length > 50) {
+      notvalid = true;
+      $("#title-error").html("Title must be between 5 and 50 characters long!");
+    }
+
+    if (!$("#title").val()) {
+      notvalid = true;
+      $("#title-error").html("Title required!");
+    }
+
+    if (!$("#ingredients").val()) {
+      notvalid = true;
+      $("#ingredients-error").html("Ingredients required!");
+    }
+
+    if (!$("#directions").val()) {
+      notvalid = true;
+      $("#directions-error").html("Directions required!");
+    }
   }
 
-  if (!$("#title").val()) {
-    notvalid = true;
-    $("#title-error").html("Title required!");
-  }
+  if ($(".step2").css("display") != "none") {
+    if ($("#prep").val() === "Choose") {
+      notvalid = true;
+      $("#prep-error").html("Choose preparation time!");
+    }
 
-  if (!$("#ingredients").val()) {
-    notvalid = true;
-    $("#ingredients-error").html("Ingredients required!");
-  }
+    if ($("#cook").val() === "Choose") {
+      notvalid = true;
+      $("#cook-error").html("Choose cooking time!");
+    }
 
-  if (!$("#description").val()) {
-    notvalid = true;
-    $("#description-error").html("Description required!");
+    if (
+      !$("#servings").val() ||
+      $("#servings").val() > 16 ||
+      $("#servings").val() < 0
+    ) {
+      notvalid = true;
+      $("#servings-error").html("Enter a valid interger!");
+    }
   }
 
   return notvalid;
 }
+
+// console.log($(this).parent());
 
 $(".next").click(function () {
   const notvalid = validate();

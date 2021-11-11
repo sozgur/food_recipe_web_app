@@ -1,0 +1,42 @@
+{% extends "user/profile.html" %}
+
+{% block detail %}
+ <div class="col-sm-10 user-list">
+    <div class="row">
+
+      {% for followed_user in user.following %}
+
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="card user-card">
+            <div class="card-inner">
+              <div class="card-contents">
+
+                <a href="{{url_for('user.user_recipes', user_id=followed_user.id)}}" class="card-link">
+                  <img src="{{ followed_user.image_url }}" alt="Image for {{ followed_user.username }}" class="card-image">
+                  <p>{{ followed_user.fullname }}</p>
+                </a>
+
+                <div class="recipe-count">
+                  <img height="25" width="25" src="/static/images/open-book.png">
+                  <span class="count">{{followed_user.recipes|length}}</span> 
+                </div>
+
+                <button class="follow-button btn btn-danger" data-id="{{followed_user.id}}">
+                  {% if current_user.is_authenticated and current_user.is_following(followed_user)%}
+                    Unfollow
+                  {% else %}
+                    Follow
+                  {% endif %}    
+                </button>
+
+              </div>
+     
+            </div>
+          </div>
+        </div>
+
+      {% endfor %}
+
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="profile-plate">
+    <div class="profile-content row justify-content-start">
+        <div class="user-info col-4">
+          <a href="{{url_for('user.user_recipes', user_id=user.id)}}">
+            <img src="{{user.image_url}}" alt="{{user.fullname}}">
+          </a>
+          <span class="owner-name">
+            <a href="{{url_for('user.user_recipes', user_id=user.id)}}" title="{{user.fullname}}">{{user.fullname}}</a>
+          </span>
+        </div>
+
+        <div class="profile-info col-8">
+            <ul class="social-info">
+                <li>
+                    <a href="{{url_for('user.user_recipes', user_id=user.id)}}" title="Recipes">
+                    <span class="count">{{user.recipes|length}}</span>
+                    Recipes</a>
+                </li>
+                <li>
+                    <a href="{{url_for('user.users_followers', user_id=user.id)}}" >
+                    <span class="count followers">{{user.followers|length}}</span>
+                    Followers</a>
+                </li>
+                <li>
+                    <a href="{{url_for('user.show_following', user_id=user.id)}}">
+                    <span class="count following">{{user.following|length}}</span>
+                    Following</a>
+                </li>
+            </ul>
+
+          {% if current_user.is_authenticated %}
+
+            {% if user.id == current_user.id %}
+    
+            <a class="profile-setting btn btn-danger" href="/profile/edit" role="button">Edit Profile</a>
+
+            {% else %}
+            <button class="follow-button profile-follow-button btn btn-danger" data-id="{{user.id}}">
+              {% if current_user.is_authenticated and current_user.is_following(user)%}
+                Unfollow
+              {% else %}
+                Follow
+              {% endif %}    
+            </button>
+
+            {% endif %}
+
+          {% else %}
+
+            <a class="follow-button btn btn-danger" href="/login" role="button">Follow</a>
+          {% endif %}
+            
+        </div>
+    </div>
+
+</div>
+
+{% block detail %}
+    <h2>Recipes</h2>
+    <div class="recipe-list mt-3">  
+        {% for recipe in recipes %}
+            <div class="recipe">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="card" style="width: 20rem;">
+                    <a href="{{url_for('recipe.detail', recipe_id=recipe.id)}}">
+                        <img class="card-img-top" src="{{recipe.img_url}}" alt="Card image cap">
+                    </a>
+                      <div class="card-body">
+                        <a class="card-title" href="{{url_for('recipe.detail', recipe_id=recipe.id)}}">{{recipe.title}}</a>
+                        <span class="recipe-elements">Servings {{recipe.serving}}, Prep {{recipe.prep}}, Cook {{recipe.cook}} </span>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}
+
+    
+{% endblock %}

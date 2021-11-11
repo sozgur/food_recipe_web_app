@@ -24,7 +24,6 @@ async function updateCalories(evt) {
     if (calories) {
         $("#calories").val(calories);
         $("#calories-info").text(calories);
-        console.log(calories);
     }
 }
 

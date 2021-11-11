@@ -1,0 +1,82 @@
+.followers-count {
+    color: #636363;
+    font-size: 14px;
+}
+
+.profile-content img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.profile-content .owner-name {
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.profile-content {
+    background-color: white;
+    height: 150px;
+    padding: 40px;
+    margin-bottom: 30px;
+}
+
+.profile-info {
+    margin-top: 15px;
+}
+
+.social-info {
+    float: right;
+    list-style: none;
+}
+
+.social-info li {
+    float: left;
+    padding: 0 16px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.social-info li a .count {
+    font-size: 20px;
+    color: black;
+    display: block;
+}
+
+.profile-setting,
+.profile-info .follow-button {
+    margin: 1% 0 0 35%;
+}
+
+.card-image {
+    border: 3px solid #fff;
+    border-radius: 70px;
+    height: 70px;
+    width: 70px;
+    margin: -30px 0 0 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.user-card {
+    margin: 10px;
+}
+
+.user-list {
+    margin-left: 9%;
+}
+
+.card-contents {
+    padding: 10px;
+}
+
+.recipe-count {
+    float: right;
+    margin-right: 10%;
+    text-align: center;
+}
+
+.recipe-count .count {
+    margin-left: 5px;
+}

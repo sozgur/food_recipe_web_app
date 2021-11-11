@@ -10,34 +10,67 @@
       <form method="POST" class="msform" id="recipe_form" action="/add-recipe">
         {{ form.hidden_tag() }}
         <!-- fieldsets -->
-        <fieldset>
+        <fieldset class="step1">
           <h2 class="fs-title">Recipe Informations</h2> 
           {{ form.title.label(class_="form-label") }}
           {{ form.title(class_="form-control") }}
           <div id="title-error" class="invalid-feedback recipe-error"></div>
               
           {{ form.ingredients.label(class_="form-label") }}
-          {{ form.ingredients(class_="form-control") }}
+          {{ form.ingredients(placeholder="Write ingredients list line by line.", class_="form-control") }}
           <div id="ingredients-error" class="invalid-feedback recipe-error"></div>
 
-          {{ form.description.label(class_="form-label") }}
-          {{ form.description(class_="form-control") }}
-          <div id="description-error" class="invalid-feedback recipe-error"></div>
+          {{ form.directions.label(class_="form-label") }}
+          {{ form.directions(placeholder="Write step by step for easy read.", class_="form-control") }}
+          <div id="directions-error" class="invalid-feedback recipe-error"></div>
 
           <input type="button" id="calculateCalories" name="next" class="next action-button" value="Next" />
 
         </fieldset>
+
+        <fieldset class="step2">
+
+          <h2 class="fs-title">Recipe Category and Time</h2>
+
+            {{ form.category.label(class_="form-label") }}
+            {{ form.category(class_="form-control") }}
+
+          <div class="row my-4">
+
+            <div class="form-group col-md-5">
+              {{ form.prep.label(class_="form-label") }}
+              {{ form.prep(class_="form-control") }}
+              <div id="prep-error" class="invalid-feedback recipe-error"></div>
+            </div>
+
+            <div class="form-group col-md-5">
+              {{ form.cook.label(class_="form-label") }}
+              {{ form.cook(class_="form-control") }}
+              <div id="cook-error" class="invalid-feedback recipe-error"></div>
+            </div>
+
+            <div class="form-group col-md-2">
+              {{ form.servings.label(class_="form-label") }}
+              {{ form.servings(class_="form-control") }}
+              <div id="servings-error" class="invalid-feedback recipe-error"></div>
+            </div>
+
+          </div>
+
+          <input type="button" name="previous" class="previous action-button" value="Previous" />
+          <input type="button" id="calculateCalories" name="next" class="next action-button" value="Next" />
+
+        </fieldset>
+
         <fieldset>
-          <h2 class="fs-title">Recipe Image and Category</h2>
-          {{ form.category.label(class_="form-label") }}
-          {{ form.category(class_="form-control") }}
+          <h2 class="fs-title">Recipe Image Link</h2>
 
           {{ form.image_url.label(class_="form-label") }}
           {{ form.image_url(class_="form-control") }}
 
           <input type="button" name="previous" class="previous action-button" value="Previous" />
-          <button class="submit action-button">Submit</button>
-
+          <button id="add-recipe" class="submit action-button">Submit</button>
+          
         </fieldset>
 
          

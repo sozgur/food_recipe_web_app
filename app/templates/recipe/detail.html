@@ -2,6 +2,84 @@
 
 {% block content %}
 
-  <h1>Detail Page</h1>
+  <h4>{{recipe.title}}</h4>
+  <div class="recipe-presentation">
+    <div class="recipe-entry-info row justify-content-start">
+      <div class="recipe-img col-7">
+        <img src="{{recipe.img_url}}" alt="{{recipe.title}}">
+      </div>
+      <div class="recipe-slider col-3">
+        <div class="recipe-social">
+          <a href="{{url_for('user.user_recipes', user_id=recipe.user.id)}}">
+            <img src="{{recipe.user.image_url}}" alt="{{recipe.user.fullname}}">
+          </a>
+          <span class="owner-name">
+            <a href="{{url_for('user.user_recipes', user_id=recipe.user.id)}}" title="{{recipe.user.fullname}}">{{recipe.user.fullname}}</a>
+          </span>
+
+          <span class="followers-count"><span class="count followers">{{recipe.user.followers|length}}</span> Followers</span>
+
+          {% if current_user.is_authenticated %}
+
+            {% if current_user.id  == recipe.user.id %}
+
+              <form>
+                <button type="submit" class="btn btn-primary" formmethod="get" formaction="/recipe/{{recipe.id}}/edit">Edit</button>             
+                <button type="submit" class="btn btn-danger" formmethod="post" formaction="/recipe/{{recipe.id}}/delete">Delete</button>        
+              </form> 
+              
+           {% else %}
+
+            <button class="follow-button btn btn-danger" data-id="{{recipe.user.id}}">
+              {% if current_user.is_authenticated and current_user.is_following(recipe.user)%}
+                Unfollow
+              {% else %}
+                Follow
+              {% endif %}    
+            </button>
+
+           {% endif %}
+
+          {% else %}
+
+            <a class="follow-button btn btn-danger" href="/login" role="button">Follow</a>
+          {% endif %}
+        </div>
+        <div class="recipe-time-info">
+
+            <div class="recipe-meta-item">
+                <div class="recipe-meta-item-header">Prep:</div>
+                <div class="recipe-meta-item-body">{{recipe.prep}}</div>
+            </div>
+            <div class="recipe-meta-item">
+                <div class="recipe-meta-item-header">Cook:</div>
+                <div class="recipe-meta-item-body">{{recipe.cook}}</div>
+            </div>
+          
+            <div class="recipe-meta-item">
+                <div class="recipe-meta-item-header">Servings:</div>
+                <div class="recipe-meta-item-body">{{recipe.serving}}</div>
+            </div>
+            <div class="recipe-meta-item">
+                <div class="recipe-meta-item-header">Per Serving:</div>
+                <div class="recipe-meta-item-body">{{per_serving}}</div>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="recipe-article col-10">
+    <div class="recipe-ingredients">
+      <h4>Ingredients</h4>
+      {{recipe.ingredients}}
+    </div>
+
+    <div class="recipe-directions">
+      <h4>Directions</h4>
+      {{recipe.directions | safe}}
+    </div>
+  </div>
 
 {% endblock %}

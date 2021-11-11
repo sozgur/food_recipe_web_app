@@ -1,11 +1,16 @@
 from app.auth import auth
 from flask import render_template, url_for, redirect, flash
-from app.models import User, db
+from app.models import User, Category, db
 from app.email import send_email
 from flask_login import login_user, current_user, logout_user, login_required
-
-from .auth_forms import RegisterForm, LoginForm, ForgotPasswordForm, CreateNewPasswordForm
+from .auth_forms import RegisterForm, LoginForm, ForgotPasswordForm, CreateNewPasswordForm, UserEditForm
 from .auth_utils import token_generator, token_get_user_id
+
+
+@auth.context_processor
+def inject_categories():
+    categories = Category.query.order_by('name').all()
+    return dict(categories=categories)
 
 
 @auth.route('/register', methods=["GET", "POST"])
@@ -60,6 +65,29 @@ def login():
 
 
     return render_template('auth/login.html', form=form)
+
+
+@auth.route('/profile/edit', methods=["GET", "POST"])
+def edit_profile():
+    """Update profile for current user."""
+
+    if not current_user.is_authenticated:
+        flash("Access unauthorized.", "danger")
+        return redirect("/login")
+
+    form = UserEditForm(obj=current_user)
+
+    if form.validate_on_submit():
+        if User.authenticate(current_user.username, form.password.data):
+            current_user.first_name = form.first_name.data
+            current_user.last_name = form.last_name.data
+
+            db.session.commit()
+            return redirect(url_for('user.user_recipes', user_id=current_user.id))
+
+        flash("Wrong password, please try again.", 'danger')
+
+    return render_template('auth/edit.html', form=form, user_id=current_user.id)
 
 
 

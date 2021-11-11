@@ -43,6 +43,15 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[Length(min=6)])
 
 
+class UserEditForm(FlaskForm):
+
+    first_name = StringField("First Name", validators = [DataRequired()])
+
+    last_name = StringField("Last Name", validators = [DataRequired()])
+
+    password = PasswordField('Password', validators=[DataRequired(), 
+        Length(min=6, message="Password must be at least 6 characters long.")])
+
 
 class ForgotPasswordForm(FlaskForm):
 
