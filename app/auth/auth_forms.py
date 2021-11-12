@@ -15,6 +15,8 @@ class RegisterForm(FlaskForm):
 
     last_name = StringField("Last Name", validators = [DataRequired()])
 
+    image_url = StringField('(Optional) Image URL')
+
     password = PasswordField('Password', validators=[DataRequired(), 
         Length(min=6, message="Password must be at least 6 characters long.")])
 
@@ -48,6 +50,8 @@ class UserEditForm(FlaskForm):
     first_name = StringField("First Name", validators = [DataRequired()])
 
     last_name = StringField("Last Name", validators = [DataRequired()])
+
+    image_url = StringField('(Optional) Image URL')
 
     password = PasswordField('Password', validators=[DataRequired(), 
         Length(min=6, message="Password must be at least 6 characters long.")])

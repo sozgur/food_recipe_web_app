@@ -11,7 +11,7 @@
       <div class="recipe-slider col-3">
         <div class="recipe-social">
           <a href="{{url_for('user.user_recipes', user_id=recipe.user.id)}}">
-            <img src="{{recipe.user.image_url}}" alt="{{recipe.user.fullname}}">
+            <img src="{{recipe.user.img_url}}" alt="{{recipe.user.fullname}}">
           </a>
           <span class="owner-name">
             <a href="{{url_for('user.user_recipes', user_id=recipe.user.id)}}" title="{{recipe.user.fullname}}">{{recipe.user.fullname}}</a>

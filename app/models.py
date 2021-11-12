@@ -41,10 +41,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(50), nullable=False, unique=True)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
-    image_url = db.Column(
-        db.Text,
-        default="/static/images/default-pic.png"
-    )
+    image_url = db.Column(db.Text)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     recipes = db.relationship('Recipe', backref='user', cascade="all, delete-orphan")
@@ -67,8 +64,16 @@ class User(UserMixin, db.Model):
     def fullname(self):
         return f"{self.first_name} {self.last_name}" 
 
+    @property
+    def img_url(self):
+        if self.image_url: 
+            return f"{self.image_url}"
+
+        return "/static/images/default-pic.png"
+        
+
     @classmethod
-    def register(cls, username, email, first_name, last_name, password):
+    def register(cls, username, email, first_name, last_name, password, image_url):
         """Register user.
 
         Hashes password and adds user to system.
@@ -82,6 +87,7 @@ class User(UserMixin, db.Model):
             first_name=first_name,
             last_name=last_name,
             password=hashed_pwd,
+            image_url=image_url
         )
 
         db.session.add(user)

@@ -30,9 +30,11 @@ def register():
     form  = RegisterForm()
 
     if form.validate_on_submit():
+
+        image_url = form.image_url.data if form.image_url.data else None
         
         new_user = User.register(form.username.data, form.email.data, form.first_name.data, 
-            form.last_name.data, form.password.data)
+            form.last_name.data, form.password.data, image_url)
         db.session.add(new_user)
         db.session.commit()
 
@@ -81,9 +83,11 @@ def edit_profile():
     form = UserEditForm(obj=current_user)
 
     if form.validate_on_submit():
+
         if User.authenticate(current_user.username, form.password.data):
             current_user.first_name = form.first_name.data
             current_user.last_name = form.last_name.data
+            current_user.image_url = form.image_url.data
 
             db.session.commit()
             return redirect(url_for('user.user_recipes', user_id=current_user.id))

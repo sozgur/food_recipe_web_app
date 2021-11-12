@@ -6,7 +6,7 @@
     <div class="profile-content row justify-content-start">
         <div class="user-info col-4">
           <a href="{{url_for('user.user_recipes', user_id=user.id)}}">
-            <img src="{{user.image_url}}" alt="{{user.fullname}}">
+            <img src="{{user.img_url}}" alt="{{user.fullname}}">
           </a>
           <span class="owner-name">
             <a href="{{url_for('user.user_recipes', user_id=user.id)}}" title="{{user.fullname}}">{{user.fullname}}</a>
