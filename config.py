@@ -1,4 +1,5 @@
 import os
+import re
 
 
 # Create the super class
@@ -31,7 +32,10 @@ class TestingConfig(Config):
 # create the production config
 class ProductionConfig(Config):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
+    uri = os.environ.get('DATABASE_URL')
+    if uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://", 1)
+    SQLALCHEMY_DATABASE_URI = uri
     MAIL_SERVER ='smtp.gmail.com'
     MAIL_PORT = 465
     MAIL_USERNAME = os.environ.get('MAIL_SENDER')
