@@ -1,5 +1,7 @@
 from flask import Flask
 from flask_migrate import Migrate
+from config import DevelopmentConfig, ProductionConfig, TestingConfig
+
 from app.models import db
 from app.models import login_manager
 from flask_mail import Mail
@@ -9,7 +11,7 @@ from flask_mail import Mail
 migrate = Migrate()
 mail = Mail()
 
-def create_app(config):
+def create_app(config=ProductionConfig):
     app = Flask(__name__)
     app.config.from_object(config)
 
