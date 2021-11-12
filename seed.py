@@ -2,7 +2,6 @@ from app.models import User, Category, Follows, db
 from csv import DictReader
 from run import app
 
-db.drop_all()
 db.create_all()
 
 with open('generator/users.csv') as users:
