@@ -59,4 +59,4 @@ class EditRecipeForm(FlaskForm):
 
     cook = SelectField('Cook Time', choices=[(tm, tm) for tm in cook_times], validators = [DataRequired()])
 
-    servings = h5fields.IntegerField("Servings", widget=h5widgets.NumberInput(min=1, max=16))
+    servings = h5fields.IntegerField("Servings", widget=h5widgets.NumberInput(min=1, max=30))

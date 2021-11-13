@@ -34,7 +34,7 @@
           <h2 class="fs-title">Recipe Category and Time</h2>
 
             {{ form.category.label(class_="form-label") }}
-            {{ form.category(class_="form-control") }}
+            {{ form.category(class_="form-control", value=recipe.category.id) }}
 
           <div class="row my-4">
 
@@ -52,7 +52,7 @@
 
             <div class="form-group col-md-2">
               {{ form.servings.label(class_="form-label") }}
-              {{ form.servings(class_="form-control", value=1) }}
+              {{ form.servings(class_="form-control", value=recipe.serving) }}
               <div id="servings-error" class="invalid-feedback recipe-error"></div>
             </div>
 
