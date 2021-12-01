@@ -33,6 +33,10 @@ a {
     color: #d6a338;
 }
 
+.navbar-brand img {
+    filter: brightness(1.2);
+}
+
 .main {
     padding: 16px;
     margin-top: 2rem;

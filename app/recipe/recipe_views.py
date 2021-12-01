@@ -14,7 +14,7 @@ def home_page():
     List all recipes order created at
     """
     recipes = Recipe.query.order_by(Recipe.created_at.desc()).all()
-    return render_template("index.html", recipes=recipes)
+    return render_template("index.html", recipes=recipes, route="/")
 
 
 
@@ -49,7 +49,7 @@ def add_recipe():
         return redirect(url_for("recipe.detail", recipe_id=recipe.id))
 
 
-    return render_template("recipe/create.html", form=form)
+    return render_template("recipe/create.html", form=form, route="/add-recipe")
 
 
 @recipe.route("/recipe/<int:recipe_id>/edit", methods=["GET", "POST"])

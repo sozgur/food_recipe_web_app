@@ -24,20 +24,31 @@
 
       <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="/"><img src="/static/images/logo.png" alt="Logo" class="img-fluid" id="logo"/></a>
+            <a class="navbar-brand" href="/"><img src="/static/images/logorbg.png" alt="Logo" class="img-fluid" id="logo"/></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/">Recipes</a>
+                        {% if route == '/' %}
+                            <a class="nav-link active" href="/">Recipes</a>
+                        {% else %}
+                            <a class="nav-link" href="/">Recipes</a>
+                        {% endif %}
                     </li>
            
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if route == "/categories" %}
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Categories
-                        </a>
+                            </a>
+                        {% else %}
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                            </a>
+                        {% endif %}
+                        
                        
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             
@@ -49,7 +60,12 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ url_for('recipe.add_recipe') }}">Add Recipe</a>
+                        {% if route == "/add-recipe" %}
+                            <a class="nav-link active" href="{{ url_for('recipe.add_recipe') }}">Add Recipe</a>
+                        {% else %}
+                            <a class="nav-link" href="{{ url_for('recipe.add_recipe') }}">Add Recipe</a>
+                        {% endif %}
+                            
                     </li>
                 </ul>
                 
