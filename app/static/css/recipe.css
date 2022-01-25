@@ -1,6 +1,6 @@
 /*form styles*/
 .msform {
-  width: 1000px;
+  width: 150%;
   margin: 50px auto;
   text-align: center;
   position: relative;
@@ -38,7 +38,7 @@
 }
 /*buttons*/
 .msform .action-button {
-  width: 100px;
+  width: 15%;
   background: #27ae60;
   font-weight: bold;
   color: white;
@@ -93,10 +93,19 @@
 }
 
 .recipe-list {
-  display: grid;
+  /*display: grid;
   line-height: normal;
   grid-row-gap: 25px;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 33% 33% 33%;*/
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  /*align-items: center;*/
+  /*justify-content: flex-start;*/
+}
+
+.recipe {
+  padding: 20px;
 }
 
 .card-img-top {

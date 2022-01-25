@@ -1,15 +1,15 @@
 # Food Recipe Wep App
 
-A web application that people can shared their own recipes with has an their own account and follow the other users for easy to access favorite cooker's recipes via following.
+A web application that people can share their own recipes with has an their own account and follow the other users for easy to access favorite cooker's recipes via following.
 
-This web application provide many recipes that added by other users for help to cook and this recipe shows servings, cooking time, preperation time, and approximate calorie for per serving for every users.
-Recipes are easily accessible under certain categories and can be searchable with specific queries on search box.
+This web application provides many recipes that added by other users and recipes shows servings, cooking time, preperation time, and approximate calorie for per serving.
+Recipes are easily accessible under certain categories and can be searchable with queries on search box.
 
 ### Features
 
 -   User can register the website for have a own account sharing for own recipes.
--   User can follow the other users and has to login the web app for following.
--   User can change later via profile their image url, firstname and lastname.
+-   User can follow the other users and has to login the web app to be able to follow.
+-   User can change their image url, firstname and lastname on their profile.
 -   User can edit or delete own recipes.
 -   Anonymous users can acces to all recipes for cooking and search the recipes.
 -   User can add their recipes under certain category and enter serving, cooking time and preparetion time informations.
@@ -46,6 +46,6 @@ Calorie will be calculated using **[external API](https://api-ninjas.com/api/nut
 
 ### Project Demo Link
 
-You can check my food web application!
+You can check my food web application from here!
 
 https://food-recipe-web-app.herokuapp.com/

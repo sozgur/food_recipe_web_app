@@ -10,7 +10,7 @@
     {% for recipe in recipes %}
         <div class="recipe">
             <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="card" style="width: 20rem;">
+            <div class="card" style="width: 23rem;">
                 <a href="{{url_for('recipe.detail', recipe_id=recipe.id)}}">
                     <img class="card-img-top" src="{{recipe.img_url}}" alt="Card image cap">
                 </a>
