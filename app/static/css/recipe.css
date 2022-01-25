@@ -176,3 +176,9 @@
   width: 90%;
   margin-top: 6 px;
 }
+
+@media screen and (max-width: 1200px) {
+  .recipe-entry-info {
+    display: flow-root;
+  }
+}
