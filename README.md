@@ -1,4 +1,4 @@
-# Food Recipe Wep App
+# Food Recipe Web App
 
 A web application that people can share their own recipes with has an their own account and follow the other users for easy to access favorite cooker's recipes via following.
 
