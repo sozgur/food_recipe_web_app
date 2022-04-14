@@ -65,3 +65,9 @@ Run all test in test file.
 ```
 $python -m unittest discover app.test
 ```
+
+#### Deploy
+
+```
+$git push heroku main
+```

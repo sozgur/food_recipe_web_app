@@ -11,7 +11,7 @@ class Config(object):
         uri = uri.replace("postgres://", "postgresql://", 1)
     SQLALCHEMY_DATABASE_URI = uri
     MAIL_SERVER ='smtp.gmail.com'
-    MAIL_PORT = 465
+    MAIL_PORT = 587
     MAIL_USERNAME = os.environ.get('MAIL_SENDER')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     MAIL_USE_TLS = False
