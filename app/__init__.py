@@ -43,5 +43,7 @@ def create_app():
     from app.recipe import recipe as recipe_blueprint
     app.register_blueprint(recipe_blueprint)
 
+    from app.test import test as test_blueprint
+    app.register_blueprint(test_blueprint)
 
     return app

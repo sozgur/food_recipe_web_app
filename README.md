@@ -49,3 +49,19 @@ Calorie will be calculated using **[external API](https://api-ninjas.com/api/nut
 You can check my food web application from here!
 
 https://food-recipe-web-app.herokuapp.com/
+
+### DEVELOPMENT
+
+##### Test
+
+Change Enviroment
+
+```
+$ export FLASK_ENV=test
+```
+
+Run all test in test file.
+
+```
+$python -m unittest discover app.test
+```

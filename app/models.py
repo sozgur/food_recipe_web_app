@@ -42,6 +42,7 @@ class User(UserMixin, db.Model):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     image_url = db.Column(db.Text)
+    auth_reset_password = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
     recipes = db.relationship('Recipe', backref='user', cascade="all, delete-orphan")

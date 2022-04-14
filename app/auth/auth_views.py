@@ -38,7 +38,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
-        flash(' Successfully Created Your Account!', "success")
+        flash('Successfully Created Your Account!', "success")
         return redirect("/login")
 
     return render_template('auth/register.html', form=form)
@@ -66,7 +66,7 @@ def login():
             return redirect('/')
 
         else:
-            flash("Invalid Email or Password", "warning")
+            flash("Invalid Username or Password", "warning")
 
 
     return render_template('auth/login.html', form=form)

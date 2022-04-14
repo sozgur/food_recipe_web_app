@@ -35,6 +35,7 @@ def add_recipe():
 
     if form.validate_on_submit():
 
+
         image_url = form.image_url.data if form.image_url.data else None
         calories = form.calories.data if form.calories.data else None
 
@@ -62,19 +63,6 @@ def edit_recipe(recipe_id):
 
     categories = [(c.id, c.name) for c in Category.query.order_by('name')]
     form.category.choices=categories
-
-    #TODO: Delete these after find soltuion for category and serving 
-    # form.category.default = recipe.category_id
-    # form.servings.default = recipe.serving 
-    # form.title.default = recipe.title 
-    # form.ingredients.default = recipe.ingredients
-    # form.directions.default = recipe.directions 
-    # form.image_url.default = recipe.image_url
-    # form.calories.default = recipe.approx_calories
-    # form.prep.default = recipe.prep
-    # form.cook.default = recipe.cook
-    # form.process()
-
 
     if form.validate_on_submit():
 
