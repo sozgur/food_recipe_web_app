@@ -1,18 +1,18 @@
 # Food Recipe Web App
 
-A web application that people can share their own recipes with has an their own account and follow the other users for easy to access favorite cooker's recipes via following.
+A web application that people can share their own recipes with has their own account and follow the other users for easy to access their favorite cooker's recipes via following.
 
-This web application provides many recipes that added by other users and recipes shows servings, cooking time, preperation time, and approximate calorie for per serving.
-Recipes are easily accessible under certain categories and can be searchable with queries on search box.
+This web application provides many recipes that are added by other users and recipes show servings, cooking time, preparation time, and approximate calories per serving.
+Recipes are easily accessible under certain categories and can be searchable with queries on the search box.
 
 ### Features
 
--   User can register the website for have a own account sharing for own recipes.
--   User can follow the other users and has to login the web app to be able to follow.
--   User can change their image url, firstname and lastname on their profile.
--   User can edit or delete own recipes.
--   Anonymous users can acces to all recipes for cooking and search the recipes.
--   User can add their recipes under certain category and enter serving, cooking time and preparetion time informations.
+-   Users can register on the website and have their own account sharing their own recipes.
+-   The user can follow the other users and has to log in to the web app to be able to follow.
+-   Users can change their image URL, first name, and last name on their profile.
+-   Users can edit or delete their own recipes.
+-   Anonymous users can access to all recipes for cooking and search the recipes.
+-   User can add their recipes under a certain categories and enter serving, cooking time and preparation time information.
 -   Approximate calories calculate automaticly using ingredient list when user add recipe.
 -   Show approximate calories for per serving on recipe description.
 -   Showing owner name and recipes count of owner under per recipes.
@@ -21,10 +21,6 @@ Recipes are easily accessible under certain categories and can be searchable wit
 ### External APIs
 
 Calorie will be calculated using **[external API](https://api-ninjas.com/api/nutrition)**.
-
-### Database Schema
-
-![Database Diagram](app/static/images/diagram.png)
 
 ### Using Technologies in This Project
 
