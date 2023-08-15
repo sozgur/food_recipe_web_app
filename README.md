@@ -11,16 +11,16 @@ Recipes are easily accessible under certain categories and can be searchable wit
 -   The user can follow the other users and has to log in to the web app to be able to follow.
 -   Users can change their image URL, first name, and last name on their profile.
 -   Users can edit or delete their own recipes.
--   Anonymous users can access to all recipes for cooking and search the recipes.
--   User can add their recipes under a certain categories and enter serving, cooking time and preparation time information.
--   Approximate calories calculate automaticly using ingredient list when user add recipe.
--   Show approximate calories for per serving on recipe description.
--   Showing owner name and recipes count of owner under per recipes.
--   User can easily access own profile page from navbar.
+-   Anonymous users can access to all recipes for cooking and search for the recipes.
+-   User can add their recipes under certain categories and enter serving, cooking time, and preparation time information.
+-   Approximate calories calculate automatically using the ingredient list when the user adds a recipe.
+-   Show approximate calories per serving in the recipe description.
+-   Showing owner name and recipe count of the owner under per recipes.
+-   Users can easily access their own profile page from the navbar.
 
 ### External APIs
 
-Calorie will be calculated using **[external API](https://api-ninjas.com/api/nutrition)**.
+Calories will be calculated using **[external API](https://api-ninjas.com/api/nutrition)**.
 
 ### Using Technologies in This Project
 
@@ -29,16 +29,16 @@ Calorie will be calculated using **[external API](https://api-ninjas.com/api/nut
 -   PostgreSQL, SQLAlchemy,
 -   JavaScript, Axios, JQuery, HTML, CSS
 -   Heroku
--   Some Libraries using with Flask:
+-   Some Libraries using Flask:
 
     -   Flask-Login for authentication
-    -   Flask-Migrate for create migrations
-    -   Flask-Mail for reset password
-    -   Flask-WTF for creating and validationg forms
-    -   Flask-Bcrypt for create secure password using hashing
+    -   Flask-Migrate for creating migrations
+    -   Flask-Mail for resetting password
+    -   Flask-WTF for creating and validating forms
+    -   Flask-Bcrypt for creating secure passwords using hashing
 
--   Flask Blueprint for organize the application with defines a collection of views, templates, static files.
--   Created different config setting for development, production and testing enviroments.
+-   Flask Blueprint for organizing the application defines a collection of views, templates, and static files.
+-   Created different config settings for development, production, and testing environments.
 
 ### Project Demo Link
 
@@ -50,7 +50,7 @@ https://food-recipe-web-app.herokuapp.com/
 
 ##### Test
 
-Change Enviroment
+Change Environment
 
 ```
 $ export FLASK_ENV=test
